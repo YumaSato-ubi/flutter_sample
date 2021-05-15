@@ -1,54 +1,34 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class GetUserName extends StatelessWidget {
-  final String documentId;
-
-  GetUserName(this.documentId);
-
+class UserInformation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     CollectionReference users = FirebaseFirestore.instance.collection('users');
 
-    return FutureBuilder<DocumentSnapshot>(
-      future: users.doc(documentId).get(),
-      builder:
-          (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
-
-        if (snapshot.hasError) {
-          return Text("Something went wrong");
-        }
-
-        if (snapshot.hasData && !snapshot.data.exists) {
-          return Text("Document does not exist");
-        }
-
-        if (snapshot.connectionState == ConnectionState.done) {
-          Map<String, dynamic> data = snapshot.data.data();
-          return Center(
-            child: Row(
-              children: [
-
-                Text(
-                  "Full Name: ${data['full_name']} ${data['last_name']}",
-                style: TextStyle(
-                    fontSize:20
-                ),
-                ),
-                Container(
-                  color: Colors.green,
-                  child: ElevatedButton(
-                      onPressed:() {Navigator.pop(context);},
-                      child: Text('back', )
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Flutter'),
+      ),
+      body: StreamBuilder<QuerySnapshot>(
+        stream: users.snapshots(),
+        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          return new ListView(
+            children: snapshot.data.docs.map((DocumentSnapshot document) {
+              return Column(
+                children: [
+                  ListTile(
+                    leading: Icon(Icons.person),
+                    title: Text(document['last_name']),
+                    subtitle: Text(document['full_name']),
                   ),
-                ),
-              ],
-            ),
+                ],
+              );
+            }).toList(),
           );
-        }
-
-        return Text("loading");
-      },
+        },
+      ),
     );
   }
 }

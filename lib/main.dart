@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => GetUserName('r13MEUVyWpwxa8Ow5oSl')),
+                          MaterialPageRoute(builder: (context) => UserInformation()),
                         );
                       },
                     ),
