@@ -5,9 +5,11 @@ class Book {
     documentID = doc.id;
     title = doc['full_name'];
     subtitle = doc['last_name'];
+    imageURL = doc['imageURL'];
   }
 
   String documentID;
   String title;
   String subtitle;
+  String imageURL;
 }

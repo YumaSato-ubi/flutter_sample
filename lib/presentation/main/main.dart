@@ -37,6 +37,15 @@ class MyApp extends StatelessWidget {
                     ),
                   ),
                   ElevatedButton(
+                    child: Text("メンバー一覧"),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => BookListPage()),
+                      );
+                    },
+                  ),
+                  ElevatedButton(
                     child: Text("新規登録"),
                     onPressed: () {
                       Navigator.push(
@@ -53,6 +62,7 @@ class MyApp extends StatelessWidget {
                         );
                       },
                       child: Text("ログイン"))
+                  ElevatedButton(onPressed: onPressed, child: child)
                 ],
               ),
             );
