@@ -2,7 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sample/book_list_model.dart';
+import 'package:sample/presentation/add_book/add_book_page.dart';
+
+import 'book_list_model.dart';
 
 class BookListPage extends StatelessWidget {
   @override
@@ -11,7 +13,7 @@ class BookListPage extends StatelessWidget {
       create: (_) => BookListModel()..fetchBooks(),
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Flutter'),
+          title: Text('レスラー一覧'),
         ),
         body: Consumer<BookListModel>(
           builder: (context, model, child) {
@@ -28,6 +30,21 @@ class BookListPage extends StatelessWidget {
             );
           },
         ),
+        floatingActionButton:
+            Consumer<BookListModel>(builder: (context, model, child) {
+          return FloatingActionButton(
+            child: Icon(Icons.add),
+            onPressed: () async {
+              await Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => AddBookPage(),
+                    fullscreenDialog: true),
+              );
+              model.fetchBooks();
+            },
+          );
+        }),
       ),
     );
   }
