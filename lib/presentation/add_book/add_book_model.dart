@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:sample/domain/book.dart';
 
 class AddBookModel extends ChangeNotifier {
   String userFullName = '';
@@ -14,6 +15,18 @@ class AddBookModel extends ChangeNotifier {
     }
     FirebaseFirestore.instance.collection('users').add(
       {'full_name': userFullName, 'last_name': userLastName},
+    );
+  }
+
+  Future updateBook(Book book) {
+    final document =
+        FirebaseFirestore.instance.collection('users').doc(book.documentID);
+    document.update(
+      {
+        'full_name': userFullName,
+        'last_name': userLastName,
+        'updateAt': Timestamp.now()
+      },
     );
   }
 }
