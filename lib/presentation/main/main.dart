@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sample/next_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:sample/presentation/add_picture/add_picture_page.dart';
 import 'package:sample/presentation/book_list/book_list_page.dart';
 import 'package:sample/presentation/login/login_page.dart';
 import 'package:sample/presentation/signup/signup_page.dart';
+import 'package:sample/presentation/tinder/tinder_page.dart';
 
 import 'main_model.dart';
 
@@ -61,8 +63,24 @@ class MyApp extends StatelessWidget {
                           MaterialPageRoute(builder: (context) => LoginPage()),
                         );
                       },
-                      child: Text("ログイン"))
-                  ElevatedButton(onPressed: onPressed, child: child)
+                      child: Text("ログイン")),
+                  ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => TinderPage()),
+                        );
+                      },
+                      child: Text("Tinder")),
+                  ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => AddPicturePage()),
+                        );
+                      },
+                      child: Text("写真の追加")),
                 ],
               ),
             );

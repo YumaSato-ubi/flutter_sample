@@ -18,6 +18,7 @@ dependencies:
   cloud_firestore: ^2.1.0
   firebase_auth: ^1.1.4
   image_picker: ^0.7.5
+  flutter_tindercard: ^0.2.0
 
 dev_dependencies:
   flutter_test:
